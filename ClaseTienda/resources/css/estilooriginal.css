@@ -1,0 +1,67 @@
+
+.PaneLogin{
+	-fx-opacity:0.85;
+	-fx-background-color: white;
+	}
+.buttoninicio{
+	-fx-background-color: green;
+}
+	
+.titulo-1{
+	-fx-font-size: 20px;
+}
+
+.borde{
+	-fx-border: 2px; 
+	-fx-border-color: black;
+}
+
+/*-------Estilos para el carrito---------------- */
+.carrito{
+	-fx-background-image: url("/carrito-compra.jpg");
+	-fx-background-size: cover;
+}
+
+.btn{
+	-fx-border-radius: 10px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #fff;
+}
+
+.blanco{
+	-fx-background-color: white;
+}
+
+.verde{
+	-fx-background-color: #5cb85c;
+}
+
+.verde-oscuro{
+	-fx-background-color: #2BBBAD;
+}
+
+.naranja{
+	-fx-background-color: #f0ad4e;
+}
+
+.rojo{
+	-fx-background-color: #d9534f;
+}
+
+
+/*-------Fin Estilos para el carrito---------------- */
+
+
+/* ----------Estilso para panel de control */
+
+.fondo-producto{
+	-fx-background-color: #333;
+	-fx-text-fill: #fff;
+}
+
+.letras-blanca{
+	-fx-text-fill: #fff;
+	-fx-font-weight: bold;
+	-fx-font-size: 20px;
+
+}
