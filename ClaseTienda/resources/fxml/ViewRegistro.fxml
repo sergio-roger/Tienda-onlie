@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchor_fondo" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="668.0" prefWidth="609.0" styleClass="fondo-registro" stylesheets="@../css/estilooriginal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerRegistro">
+   <children>
+      <Pane layoutX="89.0" layoutY="31.0" prefHeight="618.0" prefWidth="432.0" styleClass="body-form">
+         <children>
+            <Label alignment="CENTER" layoutX="105.0" layoutY="21.0" prefHeight="39.0" prefWidth="222.0" style="-fx-text-fill: #fff;" styleClass="titulo" text="REGISTRARSE " />
+            <TextField fx:id="txt_nombres" layoutX="45.0" layoutY="127.0" prefHeight="39.0" prefWidth="177.0" promptText="Nombre">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txt_apellidos" layoutX="222.0" layoutY="127.0" prefHeight="39.0" prefWidth="177.0" promptText="Apellido">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txt_correo" layoutX="45.0" layoutY="181.0" prefHeight="39.0" prefWidth="354.0" promptText="Correo electrónico">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <Label layoutX="48.0" layoutY="86.0" styleClass="letras-blanca" text="Datos Personales" />
+            <Label layoutX="48.0" layoutY="261.0" styleClass="letras-blanca" text="Datos de Inicio" />
+            <TextField fx:id="txt_usuario" layoutX="45.0" layoutY="301.0" prefHeight="39.0" prefWidth="186.0" promptText="Usuario">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="txt_pass" layoutX="45.0" layoutY="350.0" prefHeight="39.0" prefWidth="354.0" promptText="Contraseña">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </PasswordField>
+            <PasswordField fx:id="txt_pass_conf" layoutX="45.0" layoutY="401.0" prefHeight="39.0" prefWidth="354.0" promptText="Repita contraseña">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </PasswordField>
+            <CheckBox fx:id="chb_aceptar_termino" alignment="CENTER_RIGHT" layoutX="48.0" layoutY="463.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="204.0" style="-fx-text-fill: #fff;" text="Acepta términos y condiciones" />
+            <Button layoutX="41.0" layoutY="503.0" mnemonicParsing="false" onAction="#Guardar_usuario" prefHeight="46.0" prefWidth="354.0" text="Confirmar y registrarme">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="verde" />
+               </styleClass>
+            </Button>
+            <Button layoutX="39.0" layoutY="558.0" mnemonicParsing="false" onAction="#Limpiar_cajas" prefHeight="46.0" prefWidth="186.0" text="Borrar datos">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="naranja" />
+               </styleClass>
+            </Button>
+            <Button layoutX="222.0" layoutY="558.0" mnemonicParsing="false" onAction="#Regresar_login" prefHeight="46.0" prefWidth="177.0" text="Regresar">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="rojo" />
+               </styleClass>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

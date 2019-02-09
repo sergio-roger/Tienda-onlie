@@ -1,31 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.media.MediaView?>
 
-<AnchorPane prefHeight="192.0" prefWidth="279.0" stylesheets="estilooriginal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerIntroTienda">
+<AnchorPane prefHeight="321.0" prefWidth="621.0" stylesheets="estilooriginal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerIntroTienda">
    <children>
-      <MediaView fx:id="mediaTienda" fitHeight="360.0" fitWidth="640.0" layoutX="18.0" layoutY="14.0" />
+      <MediaView fx:id="mediaTienda" fitHeight="360.0" fitWidth="640.0" layoutX="2.0" layoutY="1.0" />
       <HBox prefHeight="0.0" prefWidth="202.0" />
       <Button layoutX="29.0" layoutY="14.0" mnemonicParsing="false" onAction="#play" text="Play" />
       <Button layoutX="77.0" layoutY="14.0" mnemonicParsing="false" onAction="#pause" text="Pause" />
       <Button layoutX="135.0" layoutY="14.0" mnemonicParsing="false" onAction="#stop" text="Stop" />
-      <Pane layoutX="431.0" layoutY="81.0" prefHeight="200.0" prefWidth="213.0" styleClass="PaneLogin">
+      <Pane layoutX="387.0" layoutY="68.0" prefHeight="247.0" prefWidth="257.0" styleClass="PaneLogin" stylesheets="@../css/estilooriginal.css">
          <children>
-            <Button fx:id="btn_login" layoutX="74.0" layoutY="133.0" mnemonicParsing="false" onAction="#CargarVistaProducto" styleClass="buttoninicio" text="iniciar" />
-            <Hyperlink layoutX="50.0" layoutY="158.0" text="olvide mi contraseña" />
-            <Label layoutX="82.0" layoutY="14.0" text="login" />
-            <Label layoutX="14.0" layoutY="38.0" text="usuario" />
-            <Label layoutX="14.0" layoutY="76.0" text="contraseña" />
-            <TextField fx:id="txt_usuario" layoutX="80.0" layoutY="34.0" prefHeight="25.0" prefWidth="121.0" />
-            <TextField fx:id="txt_pass" layoutX="80.0" layoutY="72.0" prefHeight="25.0" prefWidth="121.0" />
+            <Button fx:id="btn_login" layoutX="20.0" layoutY="128.0" mnemonicParsing="false" onAction="#Iniciar" prefHeight="34.0" prefWidth="220.0" stylesheets="@../css/estilooriginal.css" text="Iniciar">
+               <styleClass>
+                  <String fx:value="verde" />
+                  <String fx:value="btn" />
+               </styleClass></Button>
+            <Hyperlink layoutX="76.0" layoutY="215.0" text="olvide mi contraseña" />
+            <Label alignment="CENTER" layoutX="80.0" layoutY="-1.0" prefHeight="30.0" prefWidth="109.0" styleClass="titulo-1" stylesheets="@../css/estilooriginal.css" text="LOGIN" />
+            <Label layoutX="14.0" layoutY="49.0" styleClass="titulo-1" text="usuario" />
+            <Label layoutX="14.0" layoutY="87.0" styleClass="titulo-1" text="contraseña" />
+            <TextField fx:id="txt_usuario" layoutX="121.0" layoutY="43.0" prefHeight="30.0" prefWidth="121.0" />
+            <Button layoutX="19.0" layoutY="171.0" mnemonicParsing="false" onAction="#Cargar_vista_registro" prefHeight="34.0" prefWidth="220.0" stylesheets="@../css/estilooriginal.css" text="Registrarme ya">
+               <styleClass>
+                  <String fx:value="naranja" />
+                  <String fx:value="btn" />
+               </styleClass>
+            </Button>
+            <PasswordField fx:id="txt_pass" layoutX="123.0" layoutY="85.0" prefHeight="30.0" prefWidth="118.0" />
          </children>
       </Pane>
    </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
 </AnchorPane>

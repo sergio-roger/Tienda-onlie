@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.sun.corba.se.impl.encoding.OSFCodeSetRegistry.Entry;
-
 import Produtos.Carrito;
 import Produtos.ObjetoCarrito;
 import Produtos.Producto;
@@ -21,15 +19,14 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.util.Callback;
 import javafx.util.converter.IntegerStringConverter;
-import javafx.util.converter.NumberStringConverter;
 
 public class ControllerCarrito {
 	
@@ -47,16 +44,7 @@ public class ControllerCarrito {
 		Cargar_tabla_carrito(c);
 	}
 	
-	private void Mockear_comprar() {
-		
-		List<Producto> listacompras = new ArrayList<Producto>();
-	
-		
-		ObservableList<Producto> listaobservable = FXCollections.observableArrayList(listacompras);
-		//listaproducto.setItems(listaobservable);
-	}
-	
-	/* private void Cargar_carrito() {
+	 private void Cargar_carrito() {
 		
 		double total = 0; 
 		int cantidad = 0;
@@ -66,7 +54,7 @@ public class ControllerCarrito {
 		TableColumn<ProductoAux, Double> col_unitario = new TableColumn<>("P. Unitario");
 		TableColumn<ProductoAux, Double> col_total = new TableColumn<>("Total");
 		
-		tabla_carrito.getColumns().addAll(col_cantidad, col_nombre, col_unitario, col_total);
+		//tabla_carrito.getColumns().addAll(col_cantidad, col_nombre, col_unitario, col_total);
 		
 		col_cantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
 		col_nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -84,17 +72,17 @@ public class ControllerCarrito {
             System.out.println(key + " : " + cantidad);
             ProductoAux aux = new ProductoAux(cantidad, key.getNombre(), key.getPrecio(), cantidad * key.getPrecio());
             
-        	tabla_carrito.getItems().add(aux);
+        	//tabla_carrito.getItems().add(aux);
         	
         	double aux_t = aux.getCantidad() * aux.getPrecio_unitario(); 
         	total = total + aux_t;
         }
-        
+        System.out.println();
         lbl_total.setText("Total a pagar:  $" + String.valueOf(total));
 		System.out.println("-------------------------------------------------------------\n");
 		
 		}
-	*/
+	
 	private Map<Producto,Integer> ConsolidadProductosCarrito(List<Producto> listacarrito)
 	{
 		Map<Producto,Integer> mapconsolidad = new HashMap<Producto, Integer>();
@@ -117,13 +105,11 @@ public class ControllerCarrito {
 				System.out.println("Map tiene cantidad " + 1 + " del objeto " + p);
 			}
 		}
-		
-			System.out.println(mapconsolidad);
-			
-			return mapconsolidad;
+		System.out.println(mapconsolidad);
+		return mapconsolidad;
 		}
 		
-		private void Cargar_tabla_carrito(Carrito c)
+	private void Cargar_tabla_carrito(Carrito c)
 		{
 			//int edit_cant ;
 			
@@ -143,7 +129,6 @@ public class ControllerCarrito {
 			col_total.setCellValueFactory(new PropertyValueFactory<>("monto"));			col_total.setEditable(false);
 			
 			col_cantidad.setCellFactory(TextFieldTableCell.<ObjetoCarrito, Integer>forTableColumn(new IntegerStringConverter()));
-			
 			col_cantidad.setOnEditCommit(
 					
 					new EventHandler<TableColumn.CellEditEvent<ObjetoCarrito,Integer>>() {
@@ -155,9 +140,12 @@ public class ControllerCarrito {
 							
 							o.setCantidad(new SimpleIntegerProperty(event.getNewValue().intValue()));
 							o.setMonto(new SimpleDoubleProperty(o.getCantidad() * o.getPrecio()));
-							System.out.println("Monot es: " + o.getMontoProperty());
+							
+							//col_total.setCellValueFactory(new PropertyValueFactory<>("monto")); 
+							
+							System.out.println("Monto es: " + o.getMontoProperty());
+							
 						}
-					
 					}
 			);
 			
@@ -166,7 +154,7 @@ public class ControllerCarrito {
 			tabla_carrito.setItems(lista_compra_observable);
 		}
 		
-		private Carrito Construir_carrito(Map<Producto, Integer> mapa_consolidad_carrito)
+	private Carrito Construir_carrito(Map<Producto, Integer> mapa_consolidad_carrito)
 		{
 			
 			Carrito c = new Carrito(1);
@@ -184,4 +172,11 @@ public class ControllerCarrito {
 			c.setListaobjetocarrito(lista_objeto_carrito);
 			return c;
 		}
+		
+	public void Resetear_carrito()
+	{
+		lista.clear();
+		tabla_carrito.setItems(null);
+		System.out.println("Lista vacía");
+	}
 }
