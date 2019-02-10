@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import Autentificacion.Usuario;
 import Produtos.Producto;
 import application.Main;
 import javafx.animation.Animation;
@@ -30,25 +31,35 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-	public class ControllerListaProducto 
-	{
+
+public class ControllerListaProducto 
+{
+	@FXML private VBox vbox_superior;
 	@FXML TilePane tileProductos;
 	@FXML ComboBox<String> cmbTemporada;
 	@FXML private Button Ir_carrito;
 	@FXML private HBox agregar_carrito_not;
+	@FXML private Label lbl_usuario;
 	
 	ControllerHelper ch;
 	private List<Producto> listaProductosCarrito = new ArrayList<Producto>();
 	private List<Producto> lista_producto = new ArrayList<Producto>();
 	
+	public static Usuario usuario_actual = null;
+	
 	public void initialize() {
 		
 		lista_producto = Main.lista_main;
+		//usuario_actual = ControllerIntroTienda.activo;
+		lbl_usuario.setText(usuario_actual.getAutentificar().getUsuario());
 		cargarComboTemporada();
 		
 		Cargar_productos_vista(lista_producto);
+		//vbox_superior.setTranslateY(-35);
 		agregar_carrito_not.setTranslateY(65);
+		agregar_carrito_not.setPrefHeight(60);
 	}
+	
 	
 	private void cargarComboTemporada() {
 		List<String> listaTemporadas= new ArrayList<String>();
@@ -109,7 +120,7 @@ import javafx.util.Duration;
 					cantidad--;
 				}
 				ControllerCarrito.lista = listaProductosCarrito;
-				Notificacion_button(0, 1000);
+				Notificacion_button(-1, 1000);
 			}
 		});
 		

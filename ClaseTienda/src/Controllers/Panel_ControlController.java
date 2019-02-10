@@ -94,7 +94,7 @@ public class Panel_ControlController implements Initializable
 	    {
 	    	lista_panel = Main.lista_main;
 	    	lista_panel_usuario = Main.lista_usuario_main;
-
+	    	
 	    	//Acciones para los productos 
 	    	Llenar_Tabla();
 	    	CargarCombo();

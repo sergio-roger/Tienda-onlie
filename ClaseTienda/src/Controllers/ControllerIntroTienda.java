@@ -48,6 +48,7 @@ public class ControllerIntroTienda implements Initializable {
 	private String pass = "123";
 	public static List<Producto> lista_tienda = new ArrayList<>();
 	public static List<Usuario> lista_usuario_intro = new ArrayList<>();
+	public static Usuario activo = null;
 	
 	public  ControllerIntroTienda() {
 		
@@ -131,6 +132,7 @@ public class ControllerIntroTienda implements Initializable {
 				//alerta.setContentText("Datos de Administrador");
 				stage.close();
 				ch.MostrarVista("/ViewPanelControl.fxml", "Dashboard", true);
+				
 				break;
 				
 			case 4:		//Existe y solo es un empleado
@@ -151,8 +153,8 @@ public class ControllerIntroTienda implements Initializable {
 				Limpiar_cajas();
 				alerta.showAndWait();
 		}
-		
 	}
+	
 	
 	private int Validar_datos()
 	{
@@ -173,7 +175,11 @@ public class ControllerIntroTienda implements Initializable {
 					existe = true;
 					
 					if(i.getRol().equals(Rol.USUARIO))
+					{						
+						ControllerListaProducto.usuario_actual = i;
+						System.out.println("Nombres: " + i.getNombres());
 						return 2;
+					}
 					
 					if(i.getRol().equals(Rol.ADMINISTRADOR))
 						return 3;
@@ -181,6 +187,7 @@ public class ControllerIntroTienda implements Initializable {
 					if(i.getRol().equals(Rol.ANALISTA) ||
 							   i.getRol().equals(Rol.GERENTE) || i.getRol().equals(Rol.VENTAS))
 						return 4;
+					
 				}
 			}
 			
