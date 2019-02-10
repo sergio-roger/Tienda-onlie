@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 public class ControllerRegistro implements Initializable {
 	
 	public static List<Usuario> lista_usuario_registro = new ArrayList<Usuario>();
+	public static Boolean control_boton = false;
 	ControllerHelper ch;
 	
 	@FXML private AnchorPane anchor_fondo;
@@ -54,7 +55,13 @@ public class ControllerRegistro implements Initializable {
 		Stage stage = (Stage) ((Parent) event.getSource()).getScene().getWindow();		
 		stage.close();
 		
-		ch.MostrarVista("/Viewintrotienda.fxml", "Lista de Productos", false);
+		if(!control_boton)
+		{
+			ch.MostrarVista("/Viewintrotienda.fxml", "Lista de Productos", false);
+		}
+			
+		else
+			control_boton = false;	
 	}
 	
 	public void Guardar_usuario()
@@ -64,7 +71,7 @@ public class ControllerRegistro implements Initializable {
 		Usuario user = Crear_usuario();
 		Autentificar auth = Crear_auth();
 		
-		System.out.println("Nombres: " + user.getNombres() + "\tApellidos: " + user.getApellidos());
+		//System.out.println("Nombres: " + user.getNombres() + "\tApellidos: " + user.getApellidos());
 		
 		op = Validar_iformacion(user, auth);
 		Tipo_alerta(op, user, auth);

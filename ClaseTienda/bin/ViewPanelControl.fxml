@@ -96,7 +96,7 @@
                               <String fx:value="verde-oscuro" />
                            </styleClass>
                         </Button>
-                        <Button layoutX="37.0" layoutY="507.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="+     Cliente">
+                        <Button layoutX="37.0" layoutY="507.0" mnemonicParsing="false" onAction="#Vista_usuario" prefHeight="40.0" prefWidth="180.0" text="+     Cliente">
                            <styleClass>
                               <String fx:value="btn" />
                               <String fx:value="violeta" />
@@ -131,6 +131,12 @@
                               </Label>
                            </children>
                         </Pane>
+                        <Button layoutX="531.0" layoutY="101.0" mnemonicParsing="false" onAction="#Actualizar_usuarios" prefHeight="33.0" prefWidth="146.0" text="Actutalizar datos">
+                           <styleClass>
+                              <String fx:value="btn-dark" />
+                              <String fx:value="dark-ouset" />
+                           </styleClass>
+                        </Button>
                      </children></AnchorPane>
             </content>
           </Tab>

@@ -11,7 +11,7 @@
    <children>
       <Label alignment="CENTER" prefHeight="31.0" prefWidth="625.0" styleClass="titulo-1" text="Carrito" textAlignment="CENTER" />
       <TableView fx:id="tabla_carrito" editable="true" layoutX="14.0" layoutY="29.0" prefHeight="291.0" prefWidth="345.0" />
-      <Button layoutX="506.0" layoutY="278.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="95.0" text="Regresar">
+      <Button layoutX="506.0" layoutY="278.0" mnemonicParsing="false" onAction="#Volver_vista" prefHeight="42.0" prefWidth="95.0" text="Regresar">
          <styleClass>
             <String fx:value="rojo" />
             <String fx:value="btn" />

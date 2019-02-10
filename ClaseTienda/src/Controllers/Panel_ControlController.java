@@ -87,7 +87,7 @@ public class Panel_ControlController implements Initializable
 	    private ArrayList<Button> vector_user_btn_eliminar = new ArrayList<>();
 	    
 	    private int d, d_usuario;
-	    private long id_general = 0;
+	    private long id_general;
 	    ControllerHelper ch;
 	    
 	    public void initialize(URL arg0, ResourceBundle arg1) 
@@ -105,6 +105,15 @@ public class Panel_ControlController implements Initializable
 	    	Llenar_tabla_usuario();
 	    	Widgets_usuarios();
 	    	Cargar_eventos_usuario_botones(lista_panel_usuario);
+	    }
+	    
+	    public void Actualizar_usuarios()
+	    {
+	    	tabla_usuarios.getItems().removeAll(lista_panel_usuario);
+	    	Llenar_tabla_usuario();
+	    	Widgets_usuarios();
+	    	Cargar_eventos_usuario_botones(lista_panel_usuario);
+	    	combo_filtro_usuario.setValue("TODOS");
 	    }
 	    
 	    private void Cargar_eventos_botones(List<Producto> lista)
@@ -153,6 +162,8 @@ public class Panel_ControlController implements Initializable
 	    		
 	    		vector_user_btn_editar.add(btn_editar); 
 	    		vector_user_btn_eliminar.add(btn_eliminar);
+	    		
+	    		vector_user_btn_eliminar.get(0).setDisable(true); 			//El primer boton del administrador bloqueado, para que no pueda eliminar esa cuenta
 	    		d_usuario++;
 	    	}
 	    	System.out.println(":::::::::::::::::::::::::::::::::");
@@ -182,13 +193,7 @@ public class Panel_ControlController implements Initializable
 	    
 	    private void Llenar_tabla_usuario()
 	    {
-	    	col_user_id.setCellValueFactory(new PropertyValueFactory<>("id"));
-	    	col_user_nombres.setCellValueFactory(new PropertyValueFactory<>("nombres"));
-	    	col_user_apellidos.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
-	    	col_user_correo.setCellValueFactory(new PropertyValueFactory<>("correo"));
-	    	col_user_rol.setCellValueFactory(new PropertyValueFactory<>("rol"));
-	    	col_user_editar.setCellValueFactory(new PropertyValueFactory<>("btn_editar"));
-			col_user_eliminar.setCellValueFactory(new PropertyValueFactory<>("btn_eliminar"));
+	    	Crear_celdas_usuarios();
 			
 			for(Usuario i : lista_panel_usuario)
 				if(i.getEstado().equals("A"))
@@ -243,7 +248,7 @@ public class Panel_ControlController implements Initializable
 	    		case "OTRO" :		nuevo = new Producto(id, producto, precio, descripcion, marca, url, Genero.OTRO,"A");		break;
     		}  
     		
-	    	id_general = 0;			return nuevo;
+	    	return nuevo;
 	    }
 	    
 	    public void Guardar_Producto()
@@ -254,6 +259,8 @@ public class Panel_ControlController implements Initializable
 	    	Producto p = Crear_P();
 	    	
 	       	alerta.setTitle("Productos");		alerta.setHeaderText(null);
+	    	
+	    	System.out.println("Id del producto: " + id_general);
 	    	
 	    	if(id_general == 0)	//Para registrar un nuevo producto
 	    	{
@@ -349,7 +356,7 @@ public class Panel_ControlController implements Initializable
 	    private void handleButtonAction(ActionEvent event)
 	    {
 	    	//Agregando las líneas de codigo para que edite el producto en el respectivo boton
-	    	int a = 0, b = 0;
+	    	int a = 0, b = 0, a1 = 0, b1 = 0;
 	    	
 	    	while(a < lista_panel.size())
 	    	{
@@ -358,7 +365,7 @@ public class Panel_ControlController implements Initializable
 	    			System.out.println("Producto: " + lista_panel.get(a).getNombre());
 	    			Producto aux = lista_panel.get(a);
 	        		
-	    			id_general = aux.getId();
+	    			id_general = aux.getId();			//Pasa id_general del producto
 	        		txt_producto.setText(aux.getNombre());
 	            	txt_precio.setText(String.valueOf(aux.getPrecio()));
 	            	txt_descripcion.setText(aux.getDescripcion());;
@@ -396,8 +403,32 @@ public class Panel_ControlController implements Initializable
 	        	}
 	    		b++;
 	    	}
+	    	
+	    	//Acciones para editar un usuario empleado o administrador
+	    	
+	    	//Acciones para eliminar un usuario empleado o administrador
+	    	while(b1 < lista_panel_usuario.size())
+	    	{
+	    		if(event.getSource() == vector_user_btn_eliminar.get(b1))
+	        	{
+	    			System.out.println("Usuario: " + lista_panel_usuario.get(b1).getNombres());
+	    			Usuario aux = lista_panel_usuario.get(b1);
+	        		
+	    			//Actualizando estado del producto
+	    			for(Usuario u : lista_panel_usuario)
+	    			{
+	    				if(u.getId() == aux.getId())
+	    				{
+	    					u.setEstado("I");
+	    					System.out.println("Producto: " + u.getNombres() + " Eliminado !");
+	    				}
+	    			}				
+	        	}
+	    		b1++;
+	    	}
 			Contar_productos();
 	    	Actualizar_tabla();
+	    	Actualizar_usuarios();
 	    }
 	    
 	    private void Actualizar_tabla() 
@@ -423,6 +454,7 @@ public class Panel_ControlController implements Initializable
 		public void CerrarSesion(ActionEvent event) {
 			
 			Main.lista_main = lista_panel;
+			Main.lista_usuario_main = lista_panel_usuario;
 			
 			Stage stage = (Stage) ((Parent) event.getSource()).getScene().getWindow();		
 			stage.close();
@@ -521,6 +553,12 @@ public class Panel_ControlController implements Initializable
 		
 		public void Vista_empleado(ActionEvent event)
 		{
-			ch.Mostrar_Vista_Modal("/ViewEmpleado.fxml", "Formulario Empleado",700,450);
+			ch.Mostrar_Vista_Modal("/ViewEmpleado.fxml", "Formulario Empleado",700,610);
+		}
+		
+		public void Vista_usuario()
+		{
+			ControllerRegistro.control_boton = true;
+			ch.Mostrar_Vista_Modal("/ViewRegistro.fxml", "Formulario Registro",609,668);
 		}
 }

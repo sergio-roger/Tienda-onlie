@@ -28,6 +28,29 @@
 	-fx-text-fill: #fff;
 }
 
+.btn-dark
+{
+	-fx-border-radius: 12px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #333;
+}
+
+.btn-dark:hover
+{
+	-fx-font-weight: bold;
+	-fx-text-fill: #fff;
+}
+
+.dark-ouset{
+	-fx-background-color: #fff;
+	-fx-border-color: #333;
+}
+
+.dark-ouset:hover{
+	-fx-background-color: #333;
+	-fx-border-color: #333;
+}
+
 .blanco{
 	-fx-background-color: white;
 }
@@ -185,4 +208,21 @@
 .fondo-empleados{
 	-fx-background-image: url("/fondo_empleado.jpg");
 	-fx-background-size: cover;
+}
+
+.letras-ligth{
+	-fx-background-color: #333;
+	-fx-text-fill: #fff;
+}
+
+.blanco-ouset{
+	-fx-background-color: #333;
+	-fx-border-color: #fff;
+}
+
+.combo-box .list-cell {
+	-fx-text-fill: #2BBBAD;
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+	
 }

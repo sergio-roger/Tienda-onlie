@@ -73,7 +73,7 @@ public class Main extends Application {
 	{	
 		//Creando las credenciales
 		Autentificar admi_auth = new Autentificar("admi", "123"); 
-		Autentificar cli_auth = new Autentificar("usuario", "usuario");
+		Autentificar cli_auth = new Autentificar("user", "user");
 		Autentificar karen_auth = new Autentificar("karen", "karen");
 		
 		//Creando los datos principales

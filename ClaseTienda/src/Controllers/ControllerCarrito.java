@@ -16,8 +16,10 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -25,6 +27,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.converter.IntegerStringConverter;
 
@@ -178,5 +181,11 @@ public class ControllerCarrito {
 		lista.clear();
 		tabla_carrito.setItems(null);
 		System.out.println("Lista vacía");
+	}
+	
+	public void Volver_vista(ActionEvent event)
+	{
+		Stage stage = (Stage) ((Parent) event.getSource()).getScene().getWindow();		
+		stage.close();
 	}
 }

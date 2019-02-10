@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class ControllerHelper {
 	
@@ -55,6 +56,7 @@ public class ControllerHelper {
 				scene.getStylesheets().add("/estilooriginal.css");
 				stage.setScene(scene);
 				stage.initModality(Modality.APPLICATION_MODAL);
+				stage.initStyle(StageStyle.UNDECORATED); 
 				//stage.initOwner(((Parent)getSource()).getScene().getWindow() );
 				stage.setMaximized(false);
 				stage.setResizable(false);

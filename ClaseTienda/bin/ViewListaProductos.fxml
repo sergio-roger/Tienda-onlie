@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -9,18 +10,22 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="468.0" prefWidth="1370.0" stylesheets="@../css/estilooriginal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerListaProducto">
+<VBox prefHeight="715.0" prefWidth="1397.0" stylesheets="@../css/estilooriginal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerListaProducto">
    <children>
-      <VBox prefHeight="417.0" prefWidth="628.0">
+      <VBox prefHeight="656.0" prefWidth="1370.0">
          <children>
-            <Label alignment="CENTER" prefHeight="65.0" prefWidth="1406.0" styleClass="titulo" stylesheets="@../css/estilooriginal.css" text="LISTA DE PRODUCTOS" />
-            <HBox prefHeight="107.0" prefWidth="1370.0">
+            <Label alignment="CENTER" prefHeight="55.0" prefWidth="1397.0" style="-fx-background-color: #333;" stylesheets="@../css/estilooriginal.css" text="LISTA DE PRODUCTOS">
+               <styleClass>
+                  <String fx:value="titulo" />
+                  <String fx:value="btn" />
+               </styleClass></Label>
+            <HBox prefHeight="61.0" prefWidth="1397.0">
                <children>
-                  <Pane prefHeight="123.0" prefWidth="1361.0" styleClass="borde">
+                  <Pane prefHeight="61.0" prefWidth="1396.0" style="-fx-background-color: #333;">
                      <children>
-                       <ComboBox fx:id="cmbTemporada" layoutX="29.0" layoutY="14.0" prefHeight="36.0" prefWidth="196.0" promptText="Seleccione una opción" /> 
-                       <Button fx:id="Ir_carrito" disable="true" layoutX="255.0" layoutY="14.0" onAction="#Cargar_vista" prefHeight="36.0" prefWidth="166.0" text="Ir a carrito de compras" />
-                        <Button layoutX="1242.0" layoutY="7.0" mnemonicParsing="false" onAction="#CerrarSesion" prefHeight="45.0" prefWidth="105.0" text="Cerrar Sección">
+                       <ComboBox fx:id="cmbTemporada" layoutX="69.0" layoutY="14.0" prefHeight="36.0" prefWidth="214.0" promptText="Seleccione una opción" styleClass="blanco" /> 
+                       <Button fx:id="Ir_carrito" disable="true" layoutX="304.0" layoutY="14.0" onAction="#Cargar_vista" prefHeight="36.0" prefWidth="166.0" style="-fx-text-fill: #fff; -fx-font-weight: bold; -fx-font-size: 13;" styleClass="verde-oscuro" text="Ir a carrito de compras" />
+                        <Button layoutX="1243.0" layoutY="8.0" mnemonicParsing="false" onAction="#CerrarSesion" prefHeight="45.0" prefWidth="105.0" text="Cerrar Sección">
                            <styleClass>
                               <String fx:value="btn" />
                               <String fx:value="rojo" />
@@ -30,8 +35,27 @@
                   </Pane>
                </children>
             </HBox>
-           <TilePane fx:id="tileProductos" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/estilooriginal.css" />
+            <Pane prefHeight="13.0" prefWidth="1397.0" />
+            <HBox prefHeight="297.0" prefWidth="1358.0">
+               <children>
+                  <Pane prefHeight="297.0" prefWidth="62.0" />
+                 <TilePane fx:id="tileProductos" prefHeight="200.0" prefWidth="1315.0" stylesheets="@../css/estilooriginal.css" />
+               </children>
+            </HBox>
          </children>
       </VBox>
+      <HBox fx:id="agregar_carrito_not" alignment="CENTER" prefHeight="61.0" prefWidth="1370.0" style="-fx-background-color: #333;">
+         <children>
+            <Label alignment="CENTER" prefHeight="24.0" prefWidth="214.0" text="Agregado al carrito">
+               <styleClass>
+                  <String fx:value="titulo-1" />
+                  <String fx:value="btn" />
+               </styleClass>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
    </children>
 </VBox>
