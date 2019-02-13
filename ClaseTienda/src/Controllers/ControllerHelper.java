@@ -1,7 +1,7 @@
 package Controllers;
 
 import java.io.IOException;
-
+import java.awt.Dimension;
 import application.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import java.awt.Dimension;
+
 
 public class ControllerHelper {
 	
@@ -43,8 +45,7 @@ public class ControllerHelper {
 	{
 		FXMLLoader loader = new FXMLLoader();
 		
-		loader.setLocation(Main.class.getResource(urlVista));
-		
+		loader.setLocation(Main.class.getResource(urlVista));	
 		
 		try {
 				Parent page = loader.load();
@@ -66,6 +67,6 @@ public class ControllerHelper {
 			
 			e.printStackTrace();
 		}
-		
 	}
+	
 }

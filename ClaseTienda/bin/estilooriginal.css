@@ -11,6 +11,10 @@
 	-fx-font-size: 20px;
 }
 
+.titulo-2{
+	-fx-font-size: 17px;
+}
+
 .borde{
 	-fx-border: 2px; 
 	-fx-border-color: black;
@@ -53,6 +57,10 @@
 
 .blanco{
 	-fx-background-color: white;
+}
+
+.dark{
+	-fx-background-color: #333;
 }
 
 .verde{
@@ -213,6 +221,7 @@
 .letras-ligth{
 	-fx-background-color: #333;
 	-fx-text-fill: #fff;
+	-fx-text-fill: #fff;
 }
 
 .blanco-ouset{
@@ -220,9 +229,36 @@
 	-fx-border-color: #fff;
 }
 
+.blanco-ouset:hover{
+	-fx-background-color: #fff;
+	-fx-border-color: #fff;
+	-fx-text-fill: #333;
+}
+
 .combo-box .list-cell {
 	-fx-text-fill: #2BBBAD;
 	-fx-font-size: 14px;
 	-fx-font-weight: bold;
 	
+}
+
+/*--------Quitando el borde al scroll panel*/
+.scroll-pane > .viewport {
+	-fx-background-color: transparent;
+	-fx-control-inner-background: transparent;
+	-fx-border-style:none;
+ }
+
+.scroll-pane {
+	-fx-background-insets: 0;
+	-fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.scroll-pane:focused {
+    -fx-background-insets: 0;
+}
+
+.scroll-pane .corner {
+    -fx-background-insets: 0;
 }

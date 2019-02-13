@@ -9,8 +9,10 @@ import java.util.ResourceBundle;
 import Autentificacion.Rol;
 import Autentificacion.Usuario;
 import Produtos.Genero;
+import Produtos.Marca;
 import Produtos.Producto;
 import application.Main;
+import javafx.animation.TranslateTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -32,7 +34,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 
 public class Panel_ControlController implements Initializable 
@@ -64,11 +68,12 @@ public class Panel_ControlController implements Initializable
 	    
 	    @FXML private ComboBox<String> combo_genero;
 	    @FXML private ComboBox<String> combo_filtro_usuario;
+	    @FXML private ComboBox<Marca> cmb_marca;
 	    @FXML private TextField txt_producto;
 	    @FXML private TextField txt_precio;
 	    @FXML private TextField txt_url;
-	    @FXML private TextField txt_marca;
 	    @FXML private TextArea txt_descripcion;
+	    @FXML private TextField txt_nueva_marca;
 	    @FXML private Label lbl_cantidad;
 	    @FXML private Label lbl_total_usuarios;
 	    @FXML private Label lbl_total_admi;
@@ -76,10 +81,12 @@ public class Panel_ControlController implements Initializable
 	    @FXML private Label lbl_total_user;
 	    @FXML private Button btn_agregar;
 	    @FXML private Button btn_cancelar;
+	    @FXML private Pane pane_marca;
 	    
 	    
 	    public static List<Producto> lista_panel = new ArrayList<Producto>();
 	    public static List<Usuario> lista_panel_usuario = new ArrayList<Usuario>();
+	    public static List<Marca> lista_panel_marca = new ArrayList<Marca>();
 	    
 	    private ArrayList<Button> vector_btn_editar = new ArrayList<>();
 	    private ArrayList<Button> vector_btn_eliminar = new ArrayList<>();
@@ -88,12 +95,17 @@ public class Panel_ControlController implements Initializable
 	    
 	    private int d, d_usuario;
 	    private long id_general;
+	    private Marca marca_editar;
+	    private Boolean marca_editada = false; 
+	    private Boolean marca_registrada = false;
+	    
 	    ControllerHelper ch;
 	    
 	    public void initialize(URL arg0, ResourceBundle arg1) 
 	    {
 	    	lista_panel = Main.lista_main;
 	    	lista_panel_usuario = Main.lista_usuario_main;
+	    	lista_panel_marca = Main.lista_marca_main;
 	    	
 	    	//Acciones para los productos 
 	    	Llenar_Tabla();
@@ -214,6 +226,23 @@ public class Panel_ControlController implements Initializable
 		    	
 	    		combo_filtro_usuario.setItems(options2);
 	    		combo_filtro_usuario.setValue("TODOS");
+	    
+	    		Cargar_combos_marca();
+	    		
+	    }
+	    
+	    private void Cargar_combos_marca()
+	    {
+	    	ObservableList<Marca> options3 = FXCollections.observableArrayList ();
+    		
+	    	lista_panel_marca.get(0).setEstado("I");
+	    	
+    		for(Marca i: lista_panel_marca)
+    			if(i.getEstado().equals("A"))
+    				options3.add(i);
+    		
+    		cmb_marca.setItems(options3);
+    		cmb_marca.setPromptText("Elija marca");
 	    }
 	    
 	    private Producto Crear_P() {
@@ -228,7 +257,7 @@ public class Panel_ControlController implements Initializable
 	    		precio = Double.parseDouble(txt_precio.getText());
 	    	
 	    	String descripcion = txt_descripcion.getText();
-	    	String marca = txt_marca.getText();
+	    	Marca marca = cmb_marca.getValue();
     		String url = txt_url.getText();
     		
     		if(url.isEmpty() || url == null)		//Validar si tiene una url, si no se asigna una imagen por defualt
@@ -253,7 +282,6 @@ public class Panel_ControlController implements Initializable
 	    
 	    public void Guardar_Producto()
 	    {
-	    	//Modificar esta función para validar bien el ingreso de productos
 	    	
 	    	Alert alerta = new Alert(AlertType.INFORMATION);
 	    	Producto p = Crear_P();
@@ -295,7 +323,7 @@ public class Panel_ControlController implements Initializable
 	        		String nombre = txt_producto.getText();
 	        		Double precio = Double.parseDouble(txt_precio.getText());
 	        		String desc = txt_descripcion.getText();
-	         		String marca = txt_marca.getText();
+	         		Marca marca = cmb_marca.getValue();
 	         		String url = txt_url.getText();
 	         		String aux_gen = combo_genero.getValue();
 	        		
@@ -328,20 +356,16 @@ public class Panel_ControlController implements Initializable
 	    	}
 	    	
 	    	Cargar_eventos_botones(lista_panel);
-	    	
 	    	alerta.showAndWait();
-	    	
 	    	Generar_id();
 	    	Widgets_producto();
 	    }
 	    
 	    public void Limpiar_cajas()
 	    {
-	    	id_general = 0;
-	    	txt_producto.clear();
-	    	txt_precio.clear();
-	    	txt_descripcion.clear();
-	    	txt_marca.clear();
+	    	id_general = 0;			txt_producto.clear();
+	    	txt_precio.clear();    	txt_descripcion.clear();
+	    	cmb_marca.getSelectionModel().clearSelection();
 	    	txt_url.clear();
 	    	combo_genero.getSelectionModel().clearSelection();
 	    	combo_genero.setPromptText("Elegir Opcion");
@@ -352,7 +376,13 @@ public class Panel_ControlController implements Initializable
 	    	long id = lista_panel.size() + 1;
 	    	return id;
 	    }
-	      
+	    
+	    private long Generar_id_marca()
+	    {
+	    	long id = lista_panel_marca.size() + 1; 
+	    	return id;
+	    }
+	    
 	    private void handleButtonAction(ActionEvent event)
 	    {
 	    	//Agregando las líneas de codigo para que edite el producto en el respectivo boton
@@ -368,8 +398,10 @@ public class Panel_ControlController implements Initializable
 	    			id_general = aux.getId();			//Pasa id_general del producto
 	        		txt_producto.setText(aux.getNombre());
 	            	txt_precio.setText(String.valueOf(aux.getPrecio()));
-	            	txt_descripcion.setText(aux.getDescripcion());;
-	            	txt_marca.setText(aux.getMarca());
+	            	txt_descripcion.setText(aux.getDescripcion());
+	            	
+	            	
+	            	cmb_marca.setValue(aux.getMarca());
 	            	
 	            	if(aux.getUrlimage().equals("/image no found.png"))
 	            		txt_url.setText("");
@@ -455,6 +487,7 @@ public class Panel_ControlController implements Initializable
 			
 			Main.lista_main = lista_panel;
 			Main.lista_usuario_main = lista_panel_usuario;
+			Main.lista_marca_main = lista_panel_marca;
 			
 			Stage stage = (Stage) ((Parent) event.getSource()).getScene().getWindow();		
 			stage.close();
@@ -549,6 +582,90 @@ public class Panel_ControlController implements Initializable
 			lbl_total_admi.setText("Total    " + admi);
 			lbl_total_emp.setText("Total    " + emp);
 			lbl_total_user.setText("Total    " + user);
+		}
+		
+		public void Editar_marca() {
+			
+			Alert alerta = new Alert(AlertType.ERROR);		alerta.setHeaderText(null);
+			Marca marca = cmb_marca.getValue();
+			
+			if(marca == null)
+			{
+				alerta.setContentText("Elija una marca a editar");
+				alerta.show();
+			}
+			else
+			{
+				Desplazar_panel(pane_marca, -80, 1000);			
+				txt_nueva_marca.setText(cmb_marca.getValue().toString());
+				marca_editar = cmb_marca.getValue();
+				marca_editada = true;		marca_registrada = false;
+			}
+		}
+		
+		public void Guardar_marca()
+		{
+			Alert alerta = new Alert(AlertType.ERROR);
+			alerta.setHeaderText(null);
+			
+			String marca = txt_nueva_marca.getText();
+			
+			if(marca.isEmpty() || marca == null)
+				alerta.setContentText("Debe ingresar datos válidos");
+			else
+			{
+				if(marca_registrada && !marca_editada)
+				{
+					Marca nueva = new Marca( Generar_id_marca(), marca, "A");
+					lista_panel_marca.add(nueva);
+					
+					Cargar_combos_marca();
+		    		
+					alerta.setAlertType(AlertType.INFORMATION);
+					alerta.setContentText("Agregado");
+					txt_nueva_marca.clear();
+				}
+				
+				if(!marca_registrada && marca_editada)
+				{
+					alerta.setAlertType(AlertType.INFORMATION);
+					
+					String texto_marca = txt_nueva_marca.getText(); 
+					
+					for(Marca i: lista_panel_marca)
+					{
+						if(i.getCodigo() == marca_editar.getCodigo())
+						{
+							i.setMarca(texto_marca);
+							marca_registrada = true; 
+							marca_editada = false;
+							Desplazar_panel(pane_marca, 270, 1000);
+						}
+					}
+					Cargar_combos_marca();
+					alerta.setContentText("Cambios guardados");
+				}
+			}
+			alerta.showAndWait();
+		}
+		
+		public void Abrir_marca()
+		{
+			Desplazar_panel(pane_marca, -80, 1000);
+			marca_registrada = true;		marca_editada = false;
+			marca_editar = null;
+		}
+		
+		public void Cerrar_marca()
+		{
+			Desplazar_panel(pane_marca, 270, 1000);
+		}
+		
+		private void Desplazar_panel(Pane panel, int x, int time)
+		{
+			TranslateTransition trans = new TranslateTransition(Duration.millis(time), panel);
+			
+			trans.setToX(x);			trans.play();
 		}
 		
 		public void Vista_empleado(ActionEvent event)

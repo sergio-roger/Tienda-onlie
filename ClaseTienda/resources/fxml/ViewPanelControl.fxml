@@ -144,17 +144,17 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="blanco">
                      <children>
-                        <TableView fx:id="TablaProducto" layoutX="390.0" layoutY="112.0" prefHeight="293.0" prefWidth="819.0">
+                        <TableView fx:id="TablaProducto" layoutX="390.0" layoutY="112.0" prefHeight="293.0" prefWidth="883.0">
                           <columns>
                             <TableColumn fx:id="Id" prefWidth="75.0" text="Id" />
                             <TableColumn fx:id="Prod" prefWidth="111.0" text="Producto" />
                               <TableColumn fx:id="Pre" prefWidth="68.0" text="Precio" />
                               <TableColumn fx:id="Desc" prefWidth="146.0" text="Descripcion" />
-                              <TableColumn fx:id="Marc" prefWidth="64.0" text="Marca" />
-                              <TableColumn fx:id="Ur" prefWidth="85.0" text="Url" />
-                              <TableColumn fx:id="Gene" prefWidth="90.0" text="Genero" />
-                              <TableColumn fx:id="col_editar" prefWidth="79.0" text="Editar" />
-                              <TableColumn fx:id="col_eliminar" prefWidth="95.0" text="Eliminar" />
+                              <TableColumn fx:id="Marc" prefWidth="71.0" text="Marca" />
+                              <TableColumn fx:id="Ur" prefWidth="93.0" text="Url" />
+                              <TableColumn fx:id="Gene" prefWidth="103.0" text="Genero" />
+                              <TableColumn fx:id="col_editar" prefWidth="110.0" text="Editar" />
+                              <TableColumn fx:id="col_eliminar" prefWidth="100.0" text="Eliminar" />
                           </columns>
                         </TableView>
                         <VBox layoutY="-1.0" prefHeight="605.0" prefWidth="380.0">
@@ -178,30 +178,48 @@
                                     <TextField fx:id="txt_producto" layoutX="12.0" layoutY="50.0" prefHeight="25.0" prefWidth="226.0" />
                                     <Label layoutX="17.0" layoutY="88.0" prefHeight="23.0" prefWidth="62.0" styleClass="letras-blanca" text="Precio" />
                                     <TextField fx:id="txt_precio" layoutX="16.0" layoutY="112.0" prefHeight="25.0" prefWidth="222.0" />
-                                    <TextField fx:id="txt_url" layoutX="20.0" layoutY="327.0" prefHeight="25.0" prefWidth="215.0" />
-                                    <TextField fx:id="txt_marca" layoutX="16.0" layoutY="271.0" prefHeight="25.0" prefWidth="219.0" />
                                     <TextArea fx:id="txt_descripcion" layoutX="16.0" layoutY="176.0" prefHeight="52.0" prefWidth="221.0" />
                                     <Label layoutX="17.0" layoutY="149.0" styleClass="letras-blanca" text="Descripción" />
-                                    <Label layoutX="19.0" layoutY="241.0" styleClass="letras-blanca" text="Marca" />
-                                    <Label layoutX="21.0" layoutY="299.0" styleClass="letras-blanca" text="Url" />
-                                    <Label layoutX="18.0" layoutY="364.0" styleClass="letras-blanca" text="Genero" />
-                                    <ComboBox fx:id="combo_genero" layoutX="19.0" layoutY="394.0" prefHeight="25.0" prefWidth="213.0" promptText="Elegir Opcion" />
-                                    <Button fx:id="btn_agregar" layoutX="18.0" layoutY="437.0" mnemonicParsing="false" onAction="#Guardar_Producto" prefHeight="42.0" prefWidth="105.0" text="Guardar">
-                                       <styleClass>
-                                          <String fx:value="btn" />
-                                          <String fx:value="verde" />
-                                       </styleClass></Button>
-                                    <Button fx:id="btn_cancelar" layoutX="142.0" layoutY="437.0" mnemonicParsing="false" onAction="#Limpiar_cajas" prefHeight="42.0" prefWidth="93.0" text="Cancelar">
-                                       <styleClass>
-                                          <String fx:value="naranja" />
-                                          <String fx:value="btn" />
-                                       </styleClass></Button>
                                     <Button layoutX="274.0" layoutY="47.0" mnemonicParsing="false" opacity="0.0" prefHeight="57.0" prefWidth="90.0" text="Eliminar">
                                        <styleClass>
                                           <String fx:value="btn" />
                                           <String fx:value="rojo" />
                                        </styleClass>
                                     </Button>
+                                    <Pane fx:id="pane_desplazo_marca" layoutX="13.0" layoutY="237.0" prefHeight="280.0" prefWidth="355.0">
+                                       <children>
+                                          <TextField fx:id="txt_url" layoutX="5.0" layoutY="102.0" prefHeight="25.0" prefWidth="215.0" />
+                                          <Label layoutX="4.0" layoutY="2.0" styleClass="letras-blanca" text="Marca" />
+                                          <Label layoutX="6.0" layoutY="74.0" styleClass="letras-blanca" text="Url" />
+                                          <Label layoutX="3.0" layoutY="134.0" styleClass="letras-blanca" text="Genero" />
+                                          <ComboBox fx:id="combo_genero" layoutX="4.0" layoutY="164.0" prefHeight="25.0" prefWidth="213.0" promptText="Elegir Opcion" />
+                                          <Button fx:id="btn_agregar" layoutX="3.0" layoutY="212.0" mnemonicParsing="false" onAction="#Guardar_Producto" prefHeight="42.0" prefWidth="105.0" text="Guardar">
+                                             <styleClass>
+                                                <String fx:value="btn" />
+                                                <String fx:value="verde" />
+                                             </styleClass>
+                                          </Button>
+                                          <Button fx:id="btn_cancelar" layoutX="127.0" layoutY="212.0" mnemonicParsing="false" onAction="#Limpiar_cajas" prefHeight="42.0" prefWidth="93.0" text="Cancelar">
+                                             <styleClass>
+                                                <String fx:value="naranja" />
+                                                <String fx:value="btn" />
+                                             </styleClass>
+                                          </Button>
+                                          <Button layoutX="235.0" layoutY="28.0" mnemonicParsing="false" onAction="#Abrir_marca" prefHeight="34.0" prefWidth="55.0" text="+">
+                                             <styleClass>
+                                                <String fx:value="btn" />
+                                                <String fx:value="verde-oscuro" />
+                                             </styleClass>
+                                          </Button>
+                                          <Button layoutX="295.0" layoutY="28.0" mnemonicParsing="false" onAction="#Editar_marca" prefHeight="34.0" prefWidth="55.0" text="Edit">
+                                             <styleClass>
+                                                <String fx:value="btn" />
+                                                <String fx:value="violeta" />
+                                             </styleClass>
+                                          </Button>
+                                          <ComboBox fx:id="cmb_marca" layoutX="5.0" layoutY="31.0" prefHeight="30.0" prefWidth="219.0" />
+                                       </children>
+                                    </Pane>
                                  </children>
                               </Pane>
                            </children>
@@ -224,6 +242,29 @@
                                     <String fx:value="titulo-1" />
                                  </styleClass>
                               </Label>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="pane_marca" layoutX="1110.0" layoutY="12.0" prefHeight="88.0" prefWidth="247.0" style="-fx-background-color: #333;" translateX="270.0">
+                           <children>
+                              <TextField fx:id="txt_nueva_marca" layoutX="14.0" layoutY="11.0" prefHeight="25.0" prefWidth="222.0" promptText="Ingrese nueva marca" style="-fx-background-color: #fff;" />
+                              <Button layoutX="14.0" layoutY="46.0" mnemonicParsing="false" onAction="#Guardar_marca" prefHeight="34.0" prefWidth="74.0" text="save">
+                                 <styleClass>
+                                    <String fx:value="btn" />
+                                    <String fx:value="verde-oscuro" />
+                                 </styleClass>
+                              </Button>
+                              <Button layoutX="88.0" layoutY="46.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="74.0" text="Delete">
+                                 <styleClass>
+                                    <String fx:value="btn" />
+                                    <String fx:value="naranja" />
+                                 </styleClass>
+                              </Button>
+                              <Button layoutX="162.0" layoutY="46.0" mnemonicParsing="false" onAction="#Cerrar_marca" prefHeight="34.0" prefWidth="74.0" text="X">
+                                 <styleClass>
+                                    <String fx:value="btn" />
+                                    <String fx:value="rojo" />
+                                 </styleClass>
+                              </Button>
                            </children>
                         </Pane>
                      </children></AnchorPane>

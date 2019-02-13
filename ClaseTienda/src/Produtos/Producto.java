@@ -6,12 +6,13 @@ public class Producto {
 	
 	protected long id; 
 	protected double precio; 
-	protected String nombre, marca, descripcion;
+	protected String nombre, descripcion;
 	protected Genero generoObjetivo;
 	protected String urlimage;
 	protected Button btn_editar;
 	protected Button btn_eliminar;
 	protected String estado;
+	protected Marca marca;
 	
 	public Producto(long id, String nombre, double precio) {
 		
@@ -29,7 +30,7 @@ public class Producto {
 		this.urlimage = urlimage;
 	}
 	
-	public Producto(long id, String nombre, double precio, String descripcion, String marca, String urlimage, Genero generoObjetivo, String estado) {
+	public Producto(long id, String nombre, double precio, String descripcion, Marca marca, String urlimage, Genero generoObjetivo, String estado) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -75,11 +76,11 @@ public class Producto {
 		this.nombre = nombre;
 	}
 
-	public String getMarca() {
+	public Marca getMarca() {
 		return marca;
 	}
 
-	public void setMarca(String marca) {
+	public void setMarca(Marca marca) {
 		this.marca = marca;
 	}
 

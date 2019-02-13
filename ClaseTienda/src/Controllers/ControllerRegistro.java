@@ -69,6 +69,7 @@ public class ControllerRegistro implements Initializable {
 		int op = 0; 
 		
 		Usuario user = Crear_usuario();
+		System.out.println("Imagen defualt: " + user.getUrl_foto());
 		Autentificar auth = Crear_auth();
 		
 		//System.out.println("Nombres: " + user.getNombres() + "\tApellidos: " + user.getApellidos());
@@ -167,6 +168,8 @@ public class ControllerRegistro implements Initializable {
 		String correo = txt_correo.getText();
 		
 		user = new Usuario(id, nombres,apellidos,correo, Rol.USUARIO, "A");
+		
+		user.setUrl_foto("/user_default.jpg");
 		
 		return user;
 	}
