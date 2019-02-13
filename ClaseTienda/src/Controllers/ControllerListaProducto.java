@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Autentificacion.Usuario;
+import Produtos.Genero;
 import Produtos.Marca;
 import Produtos.Producto;
 import application.Main;
@@ -18,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -26,6 +28,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Skin;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.ToggleGroup;
@@ -36,6 +39,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -51,7 +55,7 @@ public class ControllerListaProducto
     @FXML private ScrollPane scrol_panel;
     
 	@FXML TilePane tileProductos;
-	@FXML ComboBox<String> cmbTemporada;
+	@FXML ComboBox<Marca> cmb_marca;
 	@FXML private Button Ir_carrito;
 	@FXML private HBox agregar_carrito_not;
 	@FXML private Label lbl_usuario;
@@ -128,16 +132,17 @@ public class ControllerListaProducto
 	
 	private void Cargar_combo_marca()
 	{
-		ObservableList<String> marca = FXCollections.observableArrayList ();
+		ObservableList<Marca> marca = FXCollections.observableArrayList ();
 		
 		lista_marca.get(0).setEstado("A");
 		
 		for(Marca i: lista_marca)
 			if(i.getEstado().equals("A"))
-				marca.add(i.getMarca());
+				marca.add(i);
 		
-		cmbTemporada.setItems(marca);
-		cmbTemporada.setPromptText("Elija marca");
+		cmb_marca.setItems(marca);
+		cmb_marca.setPromptText("Elija marca");
+		cmb_marca.setValue(lista_marca.get(0));
 	}
 	
 	private HBox Espacio_tile_productos(VBox producto)
@@ -171,9 +176,14 @@ public class ControllerListaProducto
 		btncomprar.getStyleClass().add("verde-oscuro");
 		
 		Spinner spnCantidad= new Spinner<>(0,20,1);
+		String estilo = spnCantidad.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL;
+		spnCantidad.getStyleClass().add(estilo);
+		spnCantidad.setPrefWidth(imgProducto.getFitWidth());
+		spnCantidad.getStylesheets().add("-fx-background-color: #000;");
 		
 		tileProducto.getChildren().addAll(imgProducto, lblnombrep, lbldescripcionProducto,lblprecio,spnCantidad,btncomprar);
 		
+		btncomprar.setPrefWidth(imgProducto.getFitWidth());
 		btncomprar.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
@@ -211,6 +221,27 @@ public class ControllerListaProducto
 				tileProductos.getChildren().add(hbx);
 				
 				System.out.println("Alto: " + tileProductos.getTileHeight() + " Ancho:  "  + tileProductos.getTileWidth());
+			}
+		}	
+		System.out.println("********************************");
+	}
+	
+	private void Filtrar_productos_genero(Genero genero)
+	{
+		System.out.println("***************" + genero.name() + "*****************");
+		
+		tileProductos.getChildren().clear();
+		
+		for(Producto i: lista_producto)
+		{
+			if(i.getEstado().equals("A") && i.getGeneroObjetivo().name().equals(genero.name()))
+			{
+				
+				VBox vbx = CrearProducto(i);			vbx.setSpacing(4.0);
+				HBox hbx = Espacio_tile_productos(vbx);
+				
+				tileProductos.getChildren().add(hbx);
+				System.out.println("Producto: " + i .getNombre());
 			}
 		}	
 		System.out.println("********************************");
@@ -271,66 +302,32 @@ public class ControllerListaProducto
 
 	public void Radio_lgbti()
 	{
-		Alert alert = new Alert(AlertType.INFORMATION);
 		
-		alert.setHeaderText(null);
-		alert.setContentText("Lgbti presionado");
-		
-		alert.showAndWait();
+		Filtrar_productos_genero(Genero.LGBTI);
 	}
 	
 	public void Radio_unisex()
 	{
-		Alert alert = new Alert(AlertType.INFORMATION);
-		
-		alert.setHeaderText(null);
-		alert.setContentText("Unisex presionado");
-		
-		alert.showAndWait();
+		Filtrar_productos_genero(Genero.UNISEX);
 	}
 	
 	public void Radio_masculino()
 	{
-		Alert alert = new Alert(AlertType.INFORMATION);
-		
-		alert.setHeaderText(null);
-		alert.setContentText("Masculino presionado");
-		
-		alert.showAndWait();
+		Filtrar_productos_genero(Genero.MASCULINO);
 	}
 	
 	public void Radio_femenino()
 	{
-		Alert alert = new Alert(AlertType.INFORMATION);
-		
-		alert.setHeaderText(null);
-		alert.setContentText("Femenino presionado");
-		
-		alert.showAndWait();
+		Filtrar_productos_genero(Genero.FEMENINO);
 	}
 	
 	public void Radio_otros()
 	{
-		Alert alert = new Alert(AlertType.INFORMATION);
-		
-		alert.setHeaderText(null);
-		alert.setContentText("Otros presionado");
-		
-		alert.showAndWait();
+		Filtrar_productos_genero(Genero.OTRO);
 	}
 	
 	public void Radio_todos()
 	{
-		Alert alert = new Alert(AlertType.INFORMATION);
-		
-		alert.setHeaderText(null);
-		alert.setContentText("Todos presionado");
-		
-		alert.showAndWait();
-	}
-	
-	private void Presentar_productos_elegidos(String radio_button)
-	{
-		
+		Cargar_productos_vista(lista_producto);
 	}
 }

@@ -38,16 +38,16 @@
                                     <String fx:value="violeta" />
                                  </styleClass>
                               </Button>
-                             <ComboBox fx:id="cmbTemporada" layoutX="17.0" layoutY="309.0" prefHeight="29.0" prefWidth="190.0" promptText="Marca" styleClass="dark" />
-                              <Label layoutX="25.0" layoutY="289.0" prefHeight="20.0" prefWidth="200.0" styleClass="titulo-2" text="Filtrar producto" />
-                              <Label layoutX="21.0" layoutY="364.0" prefHeight="20.0" prefWidth="200.0" styleClass="titulo-2" text="Genero" />
+                             <ComboBox fx:id="cmb_marca" layoutX="17.0" layoutY="309.0" prefHeight="29.0" prefWidth="190.0" promptText="Marca" styleClass="dark" />
+                              <Label layoutX="18.0" layoutY="284.0" prefHeight="20.0" prefWidth="189.0" styleClass="titulo-2" text="Filtrar por marca" />
+                              <Label layoutX="21.0" layoutY="364.0" prefHeight="20.0" prefWidth="200.0" styleClass="titulo-2" text="Filtrar por genero" />
                               <RadioButton fx:id="rdb_masc" layoutX="17.0" layoutY="446.0" mnemonicParsing="false" onAction="#Radio_masculino" text="Masculino" />
                               <RadioButton fx:id="rdb_fem" layoutX="17.0" layoutY="475.0" mnemonicParsing="false" onAction="#Radio_femenino" text="Femenino" />
                               <RadioButton fx:id="rdb_lg" layoutX="17.0" layoutY="393.0" mnemonicParsing="false" onAction="#Radio_lgbti" text="LGBTI" />
                               <RadioButton fx:id="rdb_unisex" layoutX="17.0" layoutY="419.0" mnemonicParsing="false" onAction="#Radio_unisex" text="Unisex" />
                               <RadioButton fx:id="rdb_otros" layoutX="127.0" layoutY="396.0" mnemonicParsing="false" onAction="#Radio_otros" text="Otros" />
                               <RadioButton fx:id="todos" layoutX="125.0" layoutY="423.0" mnemonicParsing="false" onAction="#Radio_todos" text="Todos" />
-                              <Button fx:id="btn_comprar" layoutX="24.0" layoutY="520.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="189.0" stylesheets="@../css/estilooriginal.css" text="Historial compras">
+                              <Button layoutX="16.0" layoutY="520.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="190.0" stylesheets="@../css/estilooriginal.css" text="Historial compras">
                                  <styleClass>
                                     <String fx:value="verde-oscuro" />
                                     <String fx:value="btn" />

@@ -67,9 +67,9 @@ public class Main extends Application {
 		Marca m4 = lista_marca_main.get(3);
 		
 		Producto p1 = new Producto(1, "Camisetas", 25, "Camiseta playera", m1, "/camisa_p.jpg", Genero.MASCULINO, "A");
-		Producto p2 = new Producto(2, "Camiseta blanca", 20, "Blanco lindo", m2, "/camiseta-b.jpg", Genero.MASCULINO, "A");
+		Producto p2 = new Producto(2, "Camiseta blanca", 20, "Blanco lindo", m2, "/camiseta-b.jpg", Genero.LGBTI, "A");
 		Producto p3 = new Producto(3, "Camiseta mujer", 45, "Elegante y femenina", m3, "/camiseta-mujer.jpg", Genero.FEMENINO, "A");
-		Producto p4 = new Producto(4, "Pantalón mujer", 33, "Camisa mangas cortas", m4, "/pantalon-mujer.jpg", Genero.FEMENINO, "A");
+		Producto p4 = new Producto(4, "Pantalón mujer", 33, "Camisa mangas cortas", m4, "/pantalon-mujer.jpg", Genero.NINGUNO, "A");
 		
 		lista_main.add(p1);
 		lista_main.add(p2);
