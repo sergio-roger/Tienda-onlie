@@ -13,7 +13,9 @@ import Produtos.Marca;
 import Produtos.Producto;
 import application.Main;
 import javafx.animation.TranslateTransition;
+import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -34,6 +36,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -51,10 +55,16 @@ public class Panel_ControlController implements Initializable
 	    @FXML private TableColumn<Producto, Double> Pre;
 	    @FXML private TableColumn<Producto, String> Desc;
 	    @FXML private TableColumn<Producto, String> Marc;
-	    @FXML private TableColumn<Producto, String> Ur;
 	    @FXML private TableColumn<Producto, Genero> Gene;
 	    @FXML private TableColumn<Producto, String> col_editar;
 	    @FXML private TableColumn<Producto, String> col_eliminar;  
+	    @FXML private Pane panel_detalles_productos;
+	    @FXML private Pane panel_image_producto;
+	    @FXML private ImageView img_producto;
+	    @FXML private Label lbl_panel_producto;
+	    @FXML private Label lbl_panel_precio;
+	    @FXML private Label lbl_panel_cantidad;
+	    @FXML private Label lbl_panel_ventas;
 	    
 	    
 	    //Columnas para la tabla de usuarios 
@@ -98,7 +108,8 @@ public class Panel_ControlController implements Initializable
 	    private Marca marca_editar;
 	    private Boolean marca_editada = false; 
 	    private Boolean marca_registrada = false;
-	    
+	    private Marca filtro_marca = null;
+	 
 	    ControllerHelper ch;
 	    
 	    public void initialize(URL arg0, ResourceBundle arg1) 
@@ -108,6 +119,8 @@ public class Panel_ControlController implements Initializable
 	    	lista_panel_marca = Main.lista_marca_main;
 	    	
 	    	//Acciones para los productos 
+	    	panel_detalles_productos.setVisible(false);
+	    	panel_image_producto.setVisible(false);
 	    	Llenar_Tabla();
 	    	CargarCombo();
 	    	Widgets_producto();
@@ -117,6 +130,7 @@ public class Panel_ControlController implements Initializable
 	    	Llenar_tabla_usuario();
 	    	Widgets_usuarios();
 	    	Cargar_eventos_usuario_botones(lista_panel_usuario);
+	    	Listener_obtener_produto_tabla();
 	    }
 	    
 	    public void Actualizar_usuarios()
@@ -149,10 +163,10 @@ public class Panel_ControlController implements Initializable
 	    		vector_btn_eliminar.add(btn_eliminar);
 	    		d++;
 	    	}
-	    	System.out.println(":::::::::::::::::::::::::::::::::");
-	    	System.out.println("Dimension array: " + vector_btn_editar.size());
-	    	System.out.println("Dimension de lista: " + lista_panel.size());
-	    	System.out.println("d = " + d);
+	    	//System.out.println(":::::::::::::::::::::::::::::::::");
+	    	//System.out.println("Dimension array: " + vector_btn_editar.size());
+	    	//System.out.println("Dimension de lista: " + lista_panel.size());
+	    	//System.out.println("d = " + d);
 	    }
 	    
 	    private void Cargar_eventos_usuario_botones(List<Usuario> lista)
@@ -191,7 +205,6 @@ public class Panel_ControlController implements Initializable
 			Pre.setCellValueFactory(new PropertyValueFactory<>("precio"));
 			Desc.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
 			Marc.setCellValueFactory(new PropertyValueFactory<>("marca"));
-			Ur.setCellValueFactory(new PropertyValueFactory<>("urlimage"));
 			Gene.setCellValueFactory(new PropertyValueFactory<>("generoObjetivo"));
 			col_editar.setCellValueFactory(new PropertyValueFactory<>("btn_editar"));
 			col_eliminar.setCellValueFactory(new PropertyValueFactory<>("btn_eliminar"));
@@ -199,8 +212,6 @@ public class Panel_ControlController implements Initializable
 			for(Producto p:lista_panel)
 				if(p.getEstado().equals("A"))
 					TablaProducto.getItems().add(p);
-				
-			//System.out.println("Productos agregados");
 	    }
 	    
 	    private void Llenar_tabla_usuario()
@@ -386,7 +397,7 @@ public class Panel_ControlController implements Initializable
 	    private void handleButtonAction(ActionEvent event)
 	    {
 	    	//Agregando las líneas de codigo para que edite el producto en el respectivo boton
-	    	int a = 0, b = 0, a1 = 0, b1 = 0;
+	    	int a = 0, b = 0, b1 = 0;
 	    	
 	    	while(a < lista_panel.size())
 	    	{
@@ -420,7 +431,6 @@ public class Panel_ControlController implements Initializable
 	    	{
 	    		if(event.getSource() == vector_btn_eliminar.get(b))
 	        	{
-	    			System.out.println("Producto: " + lista_panel.get(b).getNombre());
 	    			Producto aux = lista_panel.get(b);
 	        		
 	    			//Actualizando estado del producto
@@ -429,6 +439,8 @@ public class Panel_ControlController implements Initializable
 	    				if(p.getId() == aux.getId())
 	    				{
 	    					p.setEstado("I");
+	    					panel_detalles_productos.setVisible(false);
+	    					panel_image_producto.setVisible(false);
 	    					System.out.println("Producto: " + p.getNombre() + " Eliminado !");
 	    				}
 	    			}				
@@ -584,6 +596,44 @@ public class Panel_ControlController implements Initializable
 			lbl_total_user.setText("Total    " + user);
 		}
 		
+		public void Eliminar_marca()
+		{
+			Alert alerta = new Alert(AlertType.ERROR);		alerta.setHeaderText(null);
+			
+			List<Marca> lista_marca = new ArrayList<>();
+			
+			if(!txt_nueva_marca.getText().isEmpty() || txt_nueva_marca != null)
+			{
+				if(!marca_registrada && marca_editada)
+				{
+					for(Marca i: lista_panel_marca)
+					{
+						if(i.equals(marca_editar))
+							continue;
+						else
+							lista_marca.add(i);
+					}
+					Eliminar_combo_marca();
+					lista_panel_marca.clear();
+					lista_panel_marca = lista_marca;
+					Cargar_combos_marca();
+					
+					marca_registrada = true; 
+					marca_editada = false;
+					
+					txt_nueva_marca.clear();
+					alerta.setAlertType(AlertType.INFORMATION);
+					alerta.setContentText("Marca eliminada");
+					alerta.showAndWait();
+				}
+			}
+			else
+			{
+				alerta.setContentText("Elija una marca");
+				alerta.showAndWait();
+			}
+		}
+		
 		public void Editar_marca() {
 			
 			Alert alerta = new Alert(AlertType.ERROR);		alerta.setHeaderText(null);
@@ -642,11 +692,44 @@ public class Panel_ControlController implements Initializable
 							Desplazar_panel(pane_marca, 270, 1000);
 						}
 					}
+					Eliminar_combo_marca();
 					Cargar_combos_marca();
 					alerta.setContentText("Cambios guardados");
 				}
 			}
 			alerta.showAndWait();
+		}
+
+		
+		private void Listener_obtener_produto_tabla()
+		{
+			TablaProducto.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Producto>() {
+
+				@Override
+				public void changed(ObservableValue<? extends Producto> arg0, Producto arg1, Producto arg2) {
+					// TODO Auto-generated method stub
+					if(TablaProducto.getSelectionModel().getSelectedItem() != null)
+					{
+						panel_detalles_productos.setVisible(true);
+						panel_image_producto.setVisible(true);
+						
+						Producto seleccion = TablaProducto.getSelectionModel().getSelectedItem();
+						Image producto = new Image(seleccion.getUrlimage());
+						
+						lbl_panel_producto.setText(seleccion.getNombre());
+						lbl_panel_precio.setText(String.valueOf(seleccion.getPrecio()));
+						img_producto.setFitWidth(200); 		img_producto.setFitHeight(170);
+						img_producto.setImage(producto);
+					}
+				}
+			});
+		}
+		
+		
+		private void Eliminar_combo_marca()
+		{
+			for(Marca i: lista_panel_marca)
+				cmb_marca.getItems().remove(i);
 		}
 		
 		public void Abrir_marca()
@@ -654,6 +737,7 @@ public class Panel_ControlController implements Initializable
 			Desplazar_panel(pane_marca, -80, 1000);
 			marca_registrada = true;		marca_editada = false;
 			marca_editar = null;
+			txt_nueva_marca.clear();
 		}
 		
 		public void Cerrar_marca()

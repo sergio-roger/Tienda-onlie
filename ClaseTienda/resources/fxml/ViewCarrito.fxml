@@ -7,29 +7,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="377.0" prefWidth="625.0" styleClass="blanco" stylesheets="@../css/estilooriginal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerCarrito">
+<AnchorPane prefHeight="377.0" prefWidth="670.0" styleClass="blanco" stylesheets="@../css/estilooriginal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerCarrito">
    <children>
       <Label alignment="CENTER" prefHeight="31.0" prefWidth="625.0" styleClass="titulo-1" text="Carrito" textAlignment="CENTER" />
-      <TableView fx:id="tabla_carrito" editable="true" layoutX="14.0" layoutY="29.0" prefHeight="291.0" prefWidth="345.0" />
-      <Button layoutX="506.0" layoutY="278.0" mnemonicParsing="false" onAction="#Volver_vista" prefHeight="42.0" prefWidth="95.0" text="Regresar">
+      <TableView fx:id="tabla_carrito" editable="true" layoutX="14.0" layoutY="29.0" prefHeight="291.0" prefWidth="415.0" />
+      <Button layoutX="561.0" layoutY="280.0" mnemonicParsing="false" onAction="#Volver_vista" prefHeight="42.0" prefWidth="95.0" text="Regresar">
          <styleClass>
             <String fx:value="rojo" />
             <String fx:value="btn" />
          </styleClass>
       </Button>
-      <Button layoutX="392.0" layoutY="278.0" mnemonicParsing="false" onAction="#Resetear_carrito" prefHeight="42.0" prefWidth="103.0" text=" Vaciar carrito">
+      <Button layoutX="447.0" layoutY="280.0" mnemonicParsing="false" onAction="#Resetear_carrito" prefHeight="42.0" prefWidth="103.0" text=" Vaciar carrito">
          <styleClass>
             <String fx:value="naranja" />
             <String fx:value="btn" />
          </styleClass>
       </Button>
-      <Button layoutX="391.0" layoutY="226.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="209.0" text="Finalizar Compra">
+      <Button layoutX="446.0" layoutY="228.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="209.0" text="Finalizar Compra">
          <styleClass>
             <String fx:value="verde" />
             <String fx:value="btn" />
          </styleClass>
       </Button>
-      <Pane layoutX="391.0" layoutY="29.0" prefHeight="163.0" prefWidth="209.0" styleClass="carrito" />
+      <Pane layoutX="446.0" layoutY="31.0" prefHeight="163.0" prefWidth="209.0" styleClass="carrito" />
       <Label fx:id="lbl_total" layoutX="22.0" layoutY="336.0" prefHeight="30.0" prefWidth="312.0" styleClass="titulo-1" text="Total $default" />
 
    </children>

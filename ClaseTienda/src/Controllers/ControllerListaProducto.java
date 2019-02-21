@@ -71,7 +71,7 @@ public class ControllerListaProducto
 	
 	
 	ControllerHelper ch;
-	private List<Producto> listaProductosCarrito = new ArrayList<Producto>();
+	public static List<Producto> listaProductosCarrito = new ArrayList<Producto>();
 	private List<Producto> lista_producto = new ArrayList<Producto>();
 	private List<Marca> lista_marca = new ArrayList<Marca>();
 	
@@ -160,7 +160,7 @@ public class ControllerListaProducto
 	public VBox CrearProducto(Producto p){
 		
 		VBox tileProducto = new VBox(2);
-		//String imagenProductoURL = p.getUrlimage();
+		Pane pi = new Pane();		pi.setPrefHeight(10);
 		ImageView imgProducto = new ImageView(p.getUrlimage());
 		
 		imgProducto.setFitWidth(180);
@@ -181,7 +181,7 @@ public class ControllerListaProducto
 		spnCantidad.setPrefWidth(imgProducto.getFitWidth());
 		spnCantidad.getStylesheets().add("-fx-background-color: #000;");
 		
-		tileProducto.getChildren().addAll(imgProducto, lblnombrep, lbldescripcionProducto,lblprecio,spnCantidad,btncomprar);
+		tileProducto.getChildren().addAll(imgProducto, lblnombrep, lbldescripcionProducto,lblprecio,spnCantidad,btncomprar, pi);
 		
 		btncomprar.setPrefWidth(imgProducto.getFitWidth());
 		btncomprar.setOnAction(new EventHandler<ActionEvent>() {
@@ -301,33 +301,38 @@ public class ControllerListaProducto
 	}
 
 	public void Radio_lgbti()
-	{
-		
+	{	
+		tileProductos.getChildren().clear();
 		Filtrar_productos_genero(Genero.LGBTI);
 	}
 	
 	public void Radio_unisex()
 	{
+		tileProductos.getChildren().clear();
 		Filtrar_productos_genero(Genero.UNISEX);
 	}
 	
 	public void Radio_masculino()
 	{
+		tileProductos.getChildren().clear();
 		Filtrar_productos_genero(Genero.MASCULINO);
 	}
 	
 	public void Radio_femenino()
 	{
+		tileProductos.getChildren().clear();
 		Filtrar_productos_genero(Genero.FEMENINO);
 	}
 	
 	public void Radio_otros()
 	{
+		tileProductos.getChildren().clear();
 		Filtrar_productos_genero(Genero.OTRO);
 	}
 	
 	public void Radio_todos()
 	{
+		tileProductos.getChildren().clear();
 		Cargar_productos_vista(lista_producto);
 	}
 }

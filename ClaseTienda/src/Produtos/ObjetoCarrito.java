@@ -16,18 +16,18 @@ public class ObjetoCarrito {
 	
 	
 
-public ObjetoCarrito(Producto p, Integer cantidad) {
-	super();
+	public ObjetoCarrito(Producto p, Integer cantidad) {
+		super();
+		
+		this.p = p;
+		this.cantidad = new  SimpleIntegerProperty(cantidad);
+		this.nombre = new  SimpleStringProperty(p.getNombre());
+		this.precio = new  SimpleDoubleProperty(p.getPrecio());
+		this.monto = new  SimpleDoubleProperty();
+		NumberBinding multiplicacionPrecioCantidad = Bindings.multiply(this.getCantidadProperty(), this.getPrecio());
+		this.monto.bind(multiplicacionPrecioCantidad);
 	
-	this.p = p;
-	this.cantidad = new  SimpleIntegerProperty(cantidad);
-	this.nombre = new  SimpleStringProperty(p.getNombre());
-	this.precio = new  SimpleDoubleProperty(p.getPrecio());
-	this.monto = new  SimpleDoubleProperty();
-	NumberBinding multiplicacionPrecioCantidad = Bindings.multiply(this.getCantidadProperty(), this.getPrecio());
-	this.monto.bind(multiplicacionPrecioCantidad);
-
-}
+	}
 	public Producto getP() {
 		return p;
 	}

@@ -6,6 +6,9 @@ import java.util.List;
 import Autentificacion.Autentificar;
 import Autentificacion.Rol;
 import Autentificacion.Usuario;
+import Produtos.Carrito;
+import Produtos.Carrito.Objeto_Carrito;
+import Produtos.Empresa;
 import Produtos.Genero;
 import Produtos.Marca;
 import Produtos.Producto;
@@ -22,6 +25,7 @@ public class Main extends Application {
 	public static List<Producto> lista_main = new ArrayList<Producto>();
 	public static List<Usuario> lista_usuario_main = new ArrayList<Usuario>();
 	public static List<Marca> lista_marca_main = new ArrayList<Marca>();
+	public static Empresa empresa = new Empresa("001", "Barrio 9 de Octubre", "Empresa xyz");
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -39,6 +43,14 @@ public class Main extends Application {
 			primaryStage.show();
 			
 			//Consultar_productos_existentes();
+			Carrito.Objeto_Carrito obj1 = new Objeto_Carrito(lista_main.get(0), 3);
+			Carrito.Objeto_Carrito obj2 = new Objeto_Carrito(lista_main.get(2), 4);
+			
+			Carrito c = new Carrito(123);
+			
+			c.getListaobjetocarrito().add(obj1);
+			c.getListObjetoCarrito().add(obj2);
+			c.Facturar();
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -46,6 +58,7 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
+		
 		launch(args);
 	}
 	
@@ -61,9 +74,9 @@ public class Main extends Application {
 	
 	private void Productos_Default() {
 		
-		Marca m1 = lista_marca_main.get(0);
-		Marca m2 = lista_marca_main.get(1);
-		Marca m3 = lista_marca_main.get(2);
+		Marca m1 = lista_marca_main.get(1);
+		Marca m2 = lista_marca_main.get(2);
+		Marca m3 = lista_marca_main.get(4);
 		Marca m4 = lista_marca_main.get(3);
 		
 		Producto p1 = new Producto(1, "Camisetas", 25, "Camiseta playera", m1, "/camisa_p.jpg", Genero.MASCULINO, "A");
