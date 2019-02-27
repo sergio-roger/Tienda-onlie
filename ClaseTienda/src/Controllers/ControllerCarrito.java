@@ -14,6 +14,7 @@ import Produtos.Carrito;
 import Produtos.ObjetoCarrito;
 import Produtos.Producto;
 import Produtos.ProductoAux;
+import application.Main;
 import Produtos.Carrito.Objeto_Carrito;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -40,24 +41,38 @@ import javafx.util.converter.IntegerStringConverter;
 public class ControllerCarrito {
 	
 	@FXML private TableView<Carrito.Objeto_Carrito> tabla_carrito;
-
-    @FXML private Label lbl_total;
-	
+    @FXML private Button btn_finalizar;
+    
     private int dim_button = 0;
-	public static List<Producto> lista;
+	private static List<Producto> lista;
 	private List<Carrito.Objeto_Carrito> lista_carrito;
 	private ArrayList<Button> vector_btn_eliminar = new ArrayList<>();
+	public static Carrito c; 
 	
 	public void initialize()
 	{
-		Cargar_lista_original(lista);
-		Refrescar_tabla(lista);
+		lista = ControllerListaProducto.listaProductosCarrito;
+		Carrito_defecto(lista);
+	}
+	
+	private void Carrito_defecto(List<Producto> productos)
+	{
+		if(lista == null || lista.isEmpty())
+		{
+			btn_finalizar.setVisible(false);
+		}
+		else
+		{
+			Cargar_lista_original(lista);
+			Refrescar_tabla(lista);	
+			btn_finalizar.setVisible(true);
+		}
 	}
 	
 	private void Refrescar_tabla(List<Producto> productos)
 	{
 		Map<Producto, Integer> mapConsolidarListaCarrito = ConsolidadProductosCarrito(productos);
-		Carrito c =  Construir_carrito(mapConsolidarListaCarrito);
+		c =  Construir_carrito(mapConsolidarListaCarrito);
 		Cargar_tabla_carrito(c);
 		lista_carrito = c.getListaobjetocarrito();	//Añadiendo la lista del objeto carrito a una lista carrito
 		Cargar_eventos_botones( c.getListaobjetocarrito());
@@ -105,7 +120,6 @@ public class ControllerCarrito {
         	total = total + aux_t;
         }
         System.out.println();
-        lbl_total.setText("Total a pagar:  $" + String.valueOf(total));
 		System.out.println("-------------------------------------------------------------\n");
 		
 		}
@@ -196,12 +210,6 @@ public class ControllerCarrito {
     	}
 	}
 	
-	private void Eliminar_producto_carrito(List<Producto> original)
-	{
-		
-		Cargar_lista_original(lista);
-	}
-	
 	@SuppressWarnings("unchecked")
 	private void Cargar_tabla_carrito(Carrito c)
 	{	
@@ -268,12 +276,23 @@ public class ControllerCarrito {
 		
 		return c;
 	}
+	
+	public void Finalizar_compra(ActionEvent event)
+	{
+		Main.carrito = c;
 		
+		ControllerHelper.Mostrar_Vista_Modal("/ViewEnvio.fxml", "Envio", 600, 400);
+		
+		Stage stage = (Stage) ((Parent) event.getSource()).getScene().getWindow();		
+		stage.close();
+	}
+	
 	public void Resetear_carrito()
 	{
 		lista.clear();
 		tabla_carrito.setItems(null);
 		System.out.println("Lista vacía");
+		btn_finalizar.setVisible(false);
 	}
 	
 	public void Volver_vista(ActionEvent event)

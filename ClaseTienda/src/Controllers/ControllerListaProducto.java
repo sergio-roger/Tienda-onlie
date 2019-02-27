@@ -79,6 +79,7 @@ public class ControllerListaProducto
 	
 	public void initialize() {
 		
+		listaProductosCarrito.clear();
 		lista_producto = Main.lista_main;
 		lista_marca = Main.lista_marca_main;
 		
@@ -161,6 +162,8 @@ public class ControllerListaProducto
 		
 		VBox tileProducto = new VBox(2);
 		Pane pi = new Pane();		pi.setPrefHeight(10);
+		System.out.println("Url: " + p.getUrlimage());
+		
 		ImageView imgProducto = new ImageView(p.getUrlimage());
 		
 		imgProducto.setFitWidth(180);
@@ -199,7 +202,7 @@ public class ControllerListaProducto
 					listaProductosCarrito.add(p);
 					cantidad--;
 				}
-				ControllerCarrito.lista = listaProductosCarrito;
+				//ControllerCarrito.lista = listaProductosCarrito;
 				Notificacion_button(-1 * 2, 1500);
 			}
 		});
@@ -271,7 +274,6 @@ public class ControllerListaProducto
 				
 		Stage stage = (Stage) ((Parent) event.getSource()).getScene().getWindow();		
 		stage.close();
-		
 		
 		ch.MostrarVista("/Viewintrotienda.fxml", "Store Online", false);
 		//Scene scene = new Scene(root,640,360);

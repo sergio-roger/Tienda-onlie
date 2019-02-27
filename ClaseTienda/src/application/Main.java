@@ -9,6 +9,8 @@ import Autentificacion.Usuario;
 import Produtos.Carrito;
 import Produtos.Carrito.Objeto_Carrito;
 import Produtos.Empresa;
+import Produtos.Envio;
+import Produtos.Factura;
 import Produtos.Genero;
 import Produtos.Marca;
 import Produtos.Producto;
@@ -25,7 +27,13 @@ public class Main extends Application {
 	public static List<Producto> lista_main = new ArrayList<Producto>();
 	public static List<Usuario> lista_usuario_main = new ArrayList<Usuario>();
 	public static List<Marca> lista_marca_main = new ArrayList<Marca>();
+	public static List<Envio> lista_envio_main = new ArrayList<>();
+	public static List<Factura> lista_factura = new ArrayList<>();
+	
 	public static Empresa empresa = new Empresa("001", "Barrio 9 de Octubre", "Empresa xyz");
+	
+	//Datos previo a la factura
+	public static Carrito carrito = null;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -58,6 +66,9 @@ public class Main extends Application {
 	}
 	
 	public static void main(String[] args) {
+		
+		empresa.setCorreo("empresaxyz@xyz.com");
+		empresa.setTelefono("083838362");
 		
 		launch(args);
 	}
@@ -94,25 +105,33 @@ public class Main extends Application {
 	{	
 		//Creando las credenciales
 		Autentificar admi_auth = new Autentificar("admi", "123"); 
-		Autentificar cli_auth = new Autentificar("user", "user");
+		Autentificar cli_auth = new Autentificar("sergio", "123");
 		Autentificar karen_auth = new Autentificar("karen", "karen");
+		Autentificar orly = new Autentificar("orly", "orly");
 		
 		//Creando los datos principales
 		Usuario admi = new  Usuario(1, "Sergio", "Floreano", "sergio@gmail.com", Rol.ADMINISTRADOR, "A");
-		Usuario cliente = new Usuario(2, "usuario", "", "usuario@gmail.com", Rol.USUARIO, "A");
+		Usuario cliente = new Usuario(2, "Sergio", "Floreano", "usuario@gmail.com", Rol.USUARIO, "A");
 		Usuario karen = new Usuario(3, "2400234126","Karen", "Velarde", "Santa Elena", "karen@hotmail.com", "0981278470", Rol.ANALISTA, "A");
+		Usuario cliente2 = new Usuario(4, "Orly", "Matias", "matias-o@gmail.com", Rol.USUARIO, "A");
+		
+		cliente.setDireccion("Ecuador, Santa Elena");
+		cliente2.setDireccion("Salinas, Ec");
 		
 		admi.setUrl_foto("/user_default.jpg");
 		cliente.setUrl_foto("/user_default.jpg");
 		karen.setUrl_foto("/user_default.jpg");
+		cliente2.setUrl_foto("/user_default.jpg");
 		
 		admi.setAutentificar(admi_auth);
 		cliente.setAutentificar(cli_auth);
 		karen.setAutentificar(karen_auth);
+		cliente2.setAutentificar(orly);
 		
 		lista_usuario_main.add(admi);
 		lista_usuario_main.add(cliente);
 		lista_usuario_main.add(karen);
+		lista_usuario_main.add(cliente2);
 	}
 	
 	private void Marca_default(){

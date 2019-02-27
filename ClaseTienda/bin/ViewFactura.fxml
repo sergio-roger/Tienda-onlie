@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="616.0" styleClass="blanco" stylesheets="@../css/estilooriginal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ControllerFactura">
+   <children>
+      <Label layoutX="33.0" layoutY="17.0" style="-fx-font-size: 30;" text="Factura" />
+      <Label fx:id="lbl_fecha_factura" layoutX="33.0" layoutY="93.0" style="-fx-font-weight: bold;" styleClass="titulo-2" text="Fecha" />
+      <Line endX="434.0" layoutX="134.0" layoutY="127.0" startX="-100.0" />
+      <Label fx:id="lbl_nombre_empresa" layoutX="34.0" layoutY="153.0" style="-fx-text-fill: #333; -fx-font-weight: bold;" styleClass="titulo-2" text="Nombre Empresa">
+         <opaqueInsets>
+            <Insets right="3.0" />
+         </opaqueInsets>
+      </Label>
+      <Label fx:id="lbl_telefono_empresa" layoutX="33.0" layoutY="205.0" styleClass="titulo-2" text="Telefono" />
+      <Label fx:id="lbl_correo_empresa" layoutX="33.0" layoutY="231.0" styleClass="titulo-2" text="Correo" />
+      <Label fx:id="lbl_direccion_empresa" layoutX="35.0" layoutY="257.0" styleClass="titulo-2" text="Direccion" />
+      <Label fx:id="lbl_ruc_empresa" layoutX="33.0" layoutY="179.0" styleClass="titulo-2" text="Ruc" />
+      <Pane layoutX="282.0" layoutY="150.0" prefHeight="128.0" prefWidth="285.0" styleClass="dark">
+         <children>
+            <Label fx:id="lbl_nombre_usuario" layoutX="14.0" layoutY="1.0" style="-fx-text-fill: #fff;" styleClass="titulo-2" text="Cliente" />
+            <Label fx:id="lbl_celular_usuario" layoutX="14.0" layoutY="26.0" style="-fx-text-fill: #fff;" styleClass="titulo-2" text="Celular" />
+            <Label fx:id="lbl_correo_usuario" layoutX="14.0" layoutY="51.0" style="-fx-text-fill: #fff;" styleClass="titulo-2" text="Correo" />
+            <Label fx:id="lbl_direccion_usuario" layoutX="14.0" layoutY="77.0" style="-fx-text-fill: #fff;" styleClass="titulo-2" text="Direccion" />
+         </children>
+      </Pane>
+      <Label layoutX="450.0" layoutY="93.0" style="-fx-font-weight: bold;" styleClass="titulo-2" text="Pedido" />
+      <Label fx:id="lbl_num_pedido" layoutX="540.0" layoutY="93.0" style="-fx-font-weight: bold;" styleClass="titulo-2" text="01" />
+      <TableView fx:id="tabla_factura" layoutX="35.0" layoutY="313.0" prefHeight="271.0" prefWidth="535.0">
+         <columns>
+            <TableColumn fx:id="col_cantidad" prefWidth="85.0" text="Cantidad" />
+            <TableColumn fx:id="col_producto" prefWidth="212.0" text="Producto" />
+            <TableColumn fx:id="col_unitario" prefWidth="135.0" text="Precion Unitario" />
+            <TableColumn fx:id="col_total" prefWidth="100.0" text="Total" />
+         </columns>
+      </TableView>
+      <Label layoutX="46.0" layoutY="611.0" styleClass="titulo-3" text="Subtotal" />
+      <Label fx:id="lbl_subtotal" layoutX="148.0" layoutY="611.0" styleClass="titulo-3" text="0" />
+      <Label layoutX="46.0" layoutY="637.0" styleClass="titulo-3" text="Iva 12%" />
+      <Label fx:id="lbl_iva" layoutX="148.0" layoutY="637.0" styleClass="titulo-3" text="0" />
+      <Label layoutX="46.0" layoutY="665.0" style="-fx-font-weight: bold;" styleClass="titulo-3" text="Total" />
+      <Label fx:id="lbl_total_factura" layoutX="148.0" layoutY="665.0" style="-fx-font-weight: bold;" styleClass="titulo-3" text="0" />
+      <Button layoutX="459.0" layoutY="608.0" mnemonicParsing="false" onAction="#Pagar_factura" prefHeight="39.0" prefWidth="112.0" text="Pagar">
+         <styleClass>
+            <String fx:value="fuente-3" />
+            <String fx:value="violeta" />
+            <String fx:value="btn" />
+         </styleClass>
+      </Button>
+      <Button layoutX="461.0" layoutY="659.0" mnemonicParsing="false" onAction="#Regresar_carrito" text="Cancelar">
+         <styleClass>
+            <String fx:value="fuente-3" />
+            <String fx:value="btn" />
+            <String fx:value="rojo" />
+         </styleClass>
+      </Button>
+      <Label fx:id="lbl_numero" layoutX="35.0" layoutY="69.0" style="-fx-font-weight: bold;" styleClass="titulo-2" text="Numero" />
+   </children>
+</AnchorPane>

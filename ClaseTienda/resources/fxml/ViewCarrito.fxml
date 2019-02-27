@@ -23,14 +23,13 @@
             <String fx:value="btn" />
          </styleClass>
       </Button>
-      <Button layoutX="446.0" layoutY="228.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="209.0" text="Finalizar Compra">
+      <Button fx:id="btn_finalizar" layoutX="446.0" layoutY="228.0" mnemonicParsing="false" onAction="#Finalizar_compra" prefHeight="42.0" prefWidth="209.0" text="Finalizar Compra">
          <styleClass>
             <String fx:value="verde" />
             <String fx:value="btn" />
          </styleClass>
       </Button>
       <Pane layoutX="446.0" layoutY="31.0" prefHeight="163.0" prefWidth="209.0" styleClass="carrito" />
-      <Label fx:id="lbl_total" layoutX="22.0" layoutY="336.0" prefHeight="30.0" prefWidth="312.0" styleClass="titulo-1" text="Total $default" />
 
    </children>
 </AnchorPane>

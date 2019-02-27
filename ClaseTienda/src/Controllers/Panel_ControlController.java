@@ -286,8 +286,7 @@ public class Panel_ControlController implements Initializable
 	    		case "UNISEX" :		nuevo = new Producto(id, producto, precio, descripcion, marca, url, Genero.UNISEX,"A");		break;		
 	    		case "NINGUNO" :	nuevo = new Producto(id, producto, precio, descripcion, marca, url, Genero.NINGUNO,"A");	break;		
 	    		case "OTRO" :		nuevo = new Producto(id, producto, precio, descripcion, marca, url, Genero.OTRO,"A");		break;
-    		}  
-    		
+    		}     		
 	    	return nuevo;
 	    }
 	    

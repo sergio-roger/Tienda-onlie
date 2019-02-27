@@ -8,6 +8,7 @@ public class Empresa {
 	private String representate_legal;
 	private String telefono;
 	private String email;
+	private String correo;
 	
 	public Empresa(String ruc, String direccion, String nombre) {
 		super();
@@ -69,6 +70,14 @@ public class Empresa {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
 	@Override

@@ -262,5 +262,16 @@
 .scroll-pane .corner {
     -fx-background-insets: 0;
 }
+.imagen_envio{
+	-fx-background-image: url("/envios.jpg");
+	-fx-background-size: cover;
+}
 
+.letras_blancas{
+	-fx-text-fill: #fff;
+}
+
+.titulo-3{
+	-fx-font-size:15px;
+}
 /*--------------Estilos para el spiner*/
